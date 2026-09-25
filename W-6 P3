@@ -1,1 +1,57 @@
+#include <stdio.h>
+#include <string.h>
 
+struct Course {
+    char code[20];
+    char title[50];
+    int credits;
+    int labCredits;
+};
+
+void createCourse4(struct Course *course,
+                   char code[],
+                   char title[],
+                   int credits,
+                   int labCredits) {
+
+    strcpy(course->code, code);
+    strcpy(course->title, title);
+    course->credits = credits;
+    course->labCredits = labCredits;
+}
+
+void createCourse3(struct Course *course,
+                   char code[],
+                   char title[],
+                   int credits) {
+
+    createCourse4(course, code, title, credits, 0);
+}
+
+int totalCredits(struct Course *course) {
+    return course->credits + course->labCredits;
+}
+
+int main() {
+    struct Course theory;
+    struct Course lab;
+
+    createCourse3(&theory,
+                  "21CSC201J",
+                  "Data Structures",
+                  4);
+
+    createCourse4(&lab,
+                  "21CSC205L",
+                  "DSA Lab",
+                  3,
+                  1);
+
+    printf("%s total credits: %d\n",
+           theory.code, totalCredits(&theory));
+
+    printf("%s total credits: %d\n",
+           lab.code, totalCredits(&lab));
+
+    return 0;
+}
