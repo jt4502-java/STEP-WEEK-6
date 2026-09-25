@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+struct PayrollAccount {
+    double basicSalary;
+    double bonus;
+};
+
+void initialize(struct PayrollAccount *account, double salary) {
+    if (salary < 0) {
+        printf("Warning: Negative salary. Starting with Rs 0.0\n");
+        account->basicSalary = 0;
+    } else {
+        account->basicSalary = salary;
+    }
+
+    account->bonus = 0;
+}
+
+void creditBonus(struct PayrollAccount *account, double amount) {
+    if (amount <= 0) {
+        printf("Invalid bonus amount\n");
+    } else {
+        account->bonus += amount;
+        printf("Bonus credited: Rs %.1f\n", amount);
+    }
+}
+
+void deductTax(struct PayrollAccount *account, double percent) {
+    if (percent < 0 || percent > 100) {
+        printf("Invalid tax percentage\n");
+    } else {
+        account->basicSalary =
+            account->basicSalary * (1 - percent / 100);
+
+        printf("Tax deducted: %.0f%%\n", percent);
+    }
+}
+
+double getNetSalary(struct PayrollAccount *account) {
+    return account->basicSalary + account->bonus;
+}
+
+int main() {
+    struct PayrollAccount account;
+
+    initialize(&account, 50000);
+
+    creditBonus(&account, 5000);
+    deductTax(&account, 10);
+
+    printf("Net salary: Rs %.1f\n",
+           getNetSalary(&account));
+
+    return 0;
+}V
