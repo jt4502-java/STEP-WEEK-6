@@ -1,1 +1,27 @@
+#include <stdio.h>
 
+struct IdCard {
+    char name[50];
+    int booksIssued;
+};
+
+int main() {
+    struct IdCard ravi = {"Ravi", 0};
+
+    struct IdCard *duplicate = &ravi;
+
+    duplicate->booksIssued = 3;
+
+    struct IdCard separate = {"Ravi", 3};
+
+    printf("Ravi's booksIssued (via first variable): %d\n",
+           ravi.booksIssued);
+
+    printf("duplicate == ravi: %s\n",
+           (duplicate == &ravi) ? "true" : "false");
+
+    printf("separate == ravi: %s\n",
+           (&separate == &ravi) ? "true" : "false");
+
+    return 0;
+}
