@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+struct HallTicket {
+    char studentName[50];
+    int seatNumber;
+};
+
+int main() {
+    struct HallTicket priya = {"Priya", 0};
+
+    struct HallTicket *copy = &priya;
+
+    copy->seatNumber = 45;
+
+    struct HallTicket separate = {"Priya", 45};
+
+    printf("Priya's seatNumber (via first variable):\n");
+    printf("%d\n", priya.seatNumber);
+
+    printf("copy == &priya: %s\n",
+           copy == &priya ? "true" : "false");
+
+    printf("&separate == &priya: %s\n",
+           &separate == &priya ? "true" : "false");
+
+    return 0;
+}
