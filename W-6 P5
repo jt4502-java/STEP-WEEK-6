@@ -1,1 +1,41 @@
+#include <stdio.h>
+#include <string.h>
 
+struct Student {
+    char name[50];
+    float attendance;
+};
+
+static char collegeName[] =
+    "SRM Institute of Science and Technology";
+
+static int studentCount = 0;
+
+void createStudent(struct Student *student,
+                   char name[],
+                   float attendance) {
+
+    strcpy(student->name, name);
+    student->attendance = attendance;
+
+    studentCount++;
+}
+
+void printCollegeInfo() {
+    printf("%s\n", collegeName);
+    printf("Students created: %d\n", studentCount);
+}
+
+int main() {
+    struct Student student1;
+    struct Student student2;
+
+    createStudent(&student1, "Ravi", 85.5);
+    createStudent(&student2, "Anitha", 90.0);
+
+    printf("2 Student objects created\n");
+
+    printCollegeInfo();
+
+    return 0;
+}
