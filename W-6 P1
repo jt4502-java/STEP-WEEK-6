@@ -1,1 +1,22 @@
-
+#include <stdio.h>
+#include <string.h>
+struct PlacementRecord {
+    char studentName[50];
+    char company[50];
+    double packageLpa;
+};
+void printRecord(struct PlacementRecord p) {
+    printf("%s -> %s @ %.1f LPA\n",
+           p.studentName, p.company, p.packageLpa);
+}
+int main() {
+    struct PlacementRecord records[3] = {
+        {"Ravi", "TCS", 4.5},
+        {"Anitha", "Zoho", 6.2},
+        {"Karthik", "Infosys", 4.0}
+    };
+    for (int i = 0; i < 3; i++) {
+        printRecord(records[i]);
+    }
+    return 0;
+}
