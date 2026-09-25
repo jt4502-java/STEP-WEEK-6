@@ -1,1 +1,50 @@
+#include <stdio.h>
 
+struct MessWallet {
+    double balance;
+};
+
+void initializeWallet(struct MessWallet *wallet, double openingBalance) {
+    if (openingBalance < 0) {
+        printf("Warning: Negative opening balance. Starting at 0.\n");
+        wallet->balance = 0;
+    } else {
+        wallet->balance = openingBalance;
+    }
+}
+
+void topUp(struct MessWallet *wallet, double amount) {
+    if (amount <= 0) {
+        printf("Top-up rejected: invalid amount\n");
+    } else {
+        wallet->balance += amount;
+        printf("Balance after top-up: %.1f\n", wallet->balance);
+    }
+}
+
+void deduct(struct MessWallet *wallet, double amount) {
+    if (amount > wallet->balance) {
+        printf("Deduct rejected: insufficient balance\n");
+    } else if (amount <= 0) {
+        printf("Deduct rejected: invalid amount\n");
+    } else {
+        wallet->balance -= amount;
+    }
+}
+
+double getBalance(struct MessWallet *wallet) {
+    return wallet->balance;
+}
+
+int main() {
+    struct MessWallet wallet;
+
+    initializeWallet(&wallet, 500);
+
+    topUp(&wallet, 200);
+    deduct(&wallet, 1000);
+
+    printf("Final balance: %.1f\n", getBalance(&wallet));
+
+    return 0;
+}
